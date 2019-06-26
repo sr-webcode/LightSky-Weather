@@ -42,7 +42,7 @@ class Main extends Component {
         />
         <Navigation burgerClick={this.toggleOverlay} />
         <Content />
-        <Redirect to="/home" />
+        {/* <Redirect to="/home" /> */}
       </Router>
     );
   }
