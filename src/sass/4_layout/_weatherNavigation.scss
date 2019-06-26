@@ -1,0 +1,73 @@
+.weather-navigation-menu {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: block;
+  min-height: 50px;
+  transition: transform 0.2s ease;
+  h2 {
+    color: #f0f0f0;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 20px;
+    margin-right: 20px;
+
+    font-weight: 400;
+    text-align: center;
+    user-select: none;
+    font-size: 27px;
+  }
+  z-index: 50;
+}
+
+.burger {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 20px;
+  margin-left: 20px;
+  &:hover {
+    div {
+      background-color: #0c9eb6;
+    }
+  }
+  div {
+    display: block;
+    height: 4px;
+    background-color: #567d8a;
+    transition: 0.4s ease;
+    border-radius: 1px;
+    margin-top: 5px;
+    &:nth-of-type(1) {
+      width: 100%;
+      position: relative;
+      &::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        background-color: #0c9eb6;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        top: 0;
+        right: 0;
+        margin-right: -4px;
+        margin-top: -3px;
+      }
+    }
+    &:nth-of-type(2) {
+      width: 80%;
+    }
+    &:nth-of-type(3) {
+      width: 60%;
+    }
+  }
+}
+
