@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import { SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG } from "constants";
 
 //Dynamically loaded components
 const Home = React.lazy(() => import("./_Home"));
+
 
 export default class Content extends Component {
   render() {
     return (
       <main className="content">
         <Switch>
-          <React.Suspense fallback={<p>page loading yeahh!</p>}>
+          <React.Suspense fallback={<div className="loader" />}>
             <Route path="/home" component={Home} />
             <Route
               path="/search"

@@ -33,11 +33,10 @@ export default class Home extends Component {
   }
 
   positionError(err) {
-    console.log(err);
+    alert(err, "Please Make Sure you have Location Services turned on!");
   }
 
   API_CALL(lat, long) {
-    
     let PROXY = "https://cors-anywhere.herokuapp.com/";
     let ENDPOINT = `https://api.darksky.net/forecast/744e7d6b0439574aaa1141614a80f683/${lat},${long}?exclude=hourly,flags`;
     let URI = PROXY + ENDPOINT;
@@ -65,7 +64,6 @@ export default class Home extends Component {
           weatherPeriod = [...weatherPeriod, forCastdays[x]];
         }
 
-   
         this.setState({
           current: {
             icon: icon,
@@ -76,7 +74,6 @@ export default class Home extends Component {
           },
           foreCast: [...weatherPeriod]
         });
-
       })
       .catch(err => {
         alert(err + "Please Refresh your browser!");
@@ -109,10 +106,8 @@ export default class Home extends Component {
   }
 
   render() {
-        
     return (
-      //put a mini loader here just in case of slow network request!
-         <div className="home-info">
+      <div className="home-info">
         {this.state.foreCast.length > 0 && (
           <Current
             data={this.state.current}
