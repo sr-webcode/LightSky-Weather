@@ -43,12 +43,9 @@ image {
   position: relative;
   z-index: 5;
   padding: 10px;
-  max-width: 450px;
+ 
   margin: 0 auto;
-
-  @include respond-to(medium) {
-    max-width: 800px;
-  }
+ 
 }
 
 .loader {

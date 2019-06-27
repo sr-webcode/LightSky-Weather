@@ -2,9 +2,11 @@
   width: 100%;
   min-height: 50px;
   position: relative;
-  margin-top: 100px;
-  @include respond-to(medium) {
-    margin-top: 0;
+  margin: 100px auto 0 auto;
+  max-width: 450px;
+   @include respond-to(medium) {
+    max-width: 800px;
+    margin: 0 auto;
     top: 50%;
     transform: translateY(-50%);
   }
