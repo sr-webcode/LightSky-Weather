@@ -4,7 +4,6 @@ import { Switch, Route } from "react-router-dom";
 //Dynamically loaded components
 const Home = React.lazy(() => import("./_Home"));
 
-
 export default class Content extends Component {
   render() {
     return (
