@@ -10,13 +10,13 @@ export default class MobileOverlay extends Component {
         <nav className="mobile-menu">
           <ul>
             <li>
-              <Link to="/home" onClick={this.props.btnClose}>
+              <Link to="/" onClick={this.props.btnClose}>
                 <FontAwesomeIcon icon="home" />
                 Home
               </Link>
             </li>
             <li>
-              <Link to="" onClick={this.props.btnClose}>
+              <Link to="/search" onClick={this.props.btnClose}>
                 <FontAwesomeIcon icon="search" />
                 Search
               </Link>
@@ -27,7 +27,7 @@ export default class MobileOverlay extends Component {
                 History
               </Link>
             </li>
-             <li>
+            <li>
               <span onClick={this.props.btnClose}>
                 <FontAwesomeIcon icon="window-close" />
                 Close

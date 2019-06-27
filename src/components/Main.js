@@ -1,7 +1,7 @@
 import "../sass/style.scss";
 import React, { Component } from "react";
 import { render as Show } from "react-dom";
-import { BrowserRouter as Router, Redirect } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 const app = document.querySelector("#app");
 
 /** Components */
@@ -42,7 +42,6 @@ class Main extends Component {
         />
         <Navigation burgerClick={this.toggleOverlay} />
         <Content />
-        <Redirect to="/home" />
       </Router>
     );
   }
