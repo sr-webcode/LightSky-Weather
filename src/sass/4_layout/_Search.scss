@@ -1,15 +1,14 @@
 .search-info {
   position: relative;
-  background-color: rgba(12, 158, 182, 0.18);
-  border: 2px solid rgba(12, 158, 182, 0.2);
   color: #fefefe;
   width: 100%;
   max-width: 500px;
   margin: 80px auto 20px auto;
   overflow-x: hidden;
-  overflow-y: auto;
-
-  min-height: 200px;
+  min-height: 100px;
+  @include respond-to(medium) {
+    max-width: 800px;
+  }
 }
 
 .input-wrapper {
@@ -33,6 +32,7 @@
   position: relative;
   border: none;
   background-color: rgba(12, 158, 182, 0.4);
+  border: 2px solid rgba(12, 158, 182, 0.2);
   display: block;
   width: 100%;
   min-height: 50px;
@@ -41,6 +41,7 @@
   font-weight: 400;
   color: #fefefe;
   outline: none;
+
   &::placeholder {
     color: rgba(254, 254, 254, 0.7);
   }
@@ -49,5 +50,36 @@
 .material-focus {
   &::after {
     transform: scaleX(1);
+  }
+}
+
+.search-results {
+  padding: 10px;
+  // background-color: rgba(12, 158, 182, 0.18);
+  min-height: 250px;
+  position: relative;
+}
+
+.search-regional {
+  margin: 10px 0;
+  font-size: 0px;
+  text-align: center;
+  .region {
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 15px;
+
+    letter-spacing: 1px;
+    display: inline-block;
+    vertical-align: top;
+    background-color: rgba(12, 158, 182, 0.4);
+    padding: 5px;
+    border-radius: 24px;
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
+    &:hover {
+      background-color: #0c9eb6;
+    }
   }
 }

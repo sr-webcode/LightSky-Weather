@@ -1,13 +1,22 @@
 import React, { Component } from "react";
+import RegionalBlock from "./_RegionalBlock";
+import SearchResult from "./_SearchResults";
 
 export default class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      textVal: null
+      regions: ["Africa", "Americas", "Asia", "Europe", "Oceania"],
+      regionSelected: "",
+      results: []
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.regionTrigger = this.regionTrigger.bind(this);
+  }
+
+  regionTrigger(e) {
+    console.log(e.target);
   }
 
   handleInput(e) {
@@ -33,9 +42,17 @@ export default class Search extends Component {
             onChange={this.handleInput}
             onFocus={this.handleFocus}
             onBlur={this.handleFocus}
-            placeholder="Country or City Name.."
+            placeholder="Type Country Name..."
           />
         </span>
+        <RegionalBlock
+          regions={this.state.regions}
+          regionTrigger={this.regionTrigger}
+        />
+        <SearchResult
+          currentRegtion={this.state.regionSelected}
+          countries={this.state.results}
+        />
       </div>
     );
   }
