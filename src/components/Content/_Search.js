@@ -38,6 +38,23 @@ export default class Search extends Component {
   componentDidMount() {
     this.setState({ regionSelected: this.state.regions[0] });
   }
+    
+  API_CALL(region){
+    let uri=`https://restcountries.eu/rest/v2/region/${region}`;
+    let req = new Request(uri,{
+        method: "GET",
+        mode: "cors",
+        headers: new Headers({
+          "Content-type": "application/json",
+        })
+    })
+    
+    fetch(req)
+        .then((resp)=>{
+          return resp.json();
+        })
+    
+  }
   render() {
     return (
       <div className="search-info">
@@ -59,8 +76,7 @@ export default class Search extends Component {
           regionTrigger={this.regionTrigger}
         />
         <SearchResult
-          currentRegion={this.state.regionSelected}
- 
+          currentRegion={this.state.regionSelected} 
         />
       </div>
     );
@@ -68,5 +84,3 @@ export default class Search extends Component {
 }
 
 
-
-//DO API CALL FOR REGION SELECTION!!!
