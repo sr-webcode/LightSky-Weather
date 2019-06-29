@@ -1,15 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class SearchResults extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default props => {
+  return (
+    <div className="search-results">
+      {props.currentRegion === null ? <div className="loader" /> : "mern"}
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div className="search-results">
-        {this.props.countries.length < 1   && <div className="loader" />}
-      </div>
-    );
-  }
-}

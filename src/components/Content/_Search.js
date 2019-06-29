@@ -7,8 +7,8 @@ export default class Search extends Component {
     super(props);
     this.state = {
       regions: ["Africa", "Americas", "Asia", "Europe", "Oceania"],
-      regionSelected: "",
-      results: []
+      regionSelected: null,  
+      regionDetails: null,
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
@@ -16,11 +16,16 @@ export default class Search extends Component {
   }
 
   regionTrigger(e) {
-    console.log(e.target);
+    this.setState({ regionSelected: e.target.textContent });
   }
 
   handleInput(e) {
-    console.log(e.target.value);
+    //erase selected region
+    if (e.target.value === "") {
+      this.setState({ regionSelected: this.state.regions[0] });
+    } else {
+      this.setState({ regionSelected: null });
+    }
   }
 
   handleFocus(e) {
@@ -30,6 +35,9 @@ export default class Search extends Component {
       : parent.classList.add("material-focus");
   }
 
+  componentDidMount() {
+    this.setState({ regionSelected: this.state.regions[0] });
+  }
   render() {
     return (
       <div className="search-info">
@@ -46,14 +54,19 @@ export default class Search extends Component {
           />
         </span>
         <RegionalBlock
+          regionSelected={this.state.regionSelected}
           regions={this.state.regions}
           regionTrigger={this.regionTrigger}
         />
         <SearchResult
-          currentRegtion={this.state.regionSelected}
-          countries={this.state.results}
+          currentRegion={this.state.regionSelected}
+ 
         />
       </div>
     );
   }
 }
+
+
+
+//DO API CALL FOR REGION SELECTION!!!
