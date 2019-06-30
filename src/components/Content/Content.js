@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 //Dynamically loaded components
 const Home = React.lazy(() => import("./_Home"));
-const Search = React.lazy(() => import("./_Search"));
+const Search = React.lazy(() => import("./_SearchArea"));
 
 export default class Content extends Component {
   render() {
