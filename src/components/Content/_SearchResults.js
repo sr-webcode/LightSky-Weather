@@ -1,66 +1,31 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class _SearchResults extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      resetter: props.resetVal,
-      storedValue: "",
-      actualValue: null
-    };
-    this.perfRequest = this.perfRequest.bind(this);
-  }
+const triggerDataFetch = e => {
+  return <div className="loader" />;
+  //call props trigger change state
+};
+export default props => {
+  
+  const { resetVal, valueToFetch } = props;
+ 
+  const dataFetching = data => {
+    props.dataFetch(data);
+    return <div className="loader" />;
+  };
 
-  API_CALL(url) {
-    let request = new Request(url, {
-      method: "GET",
-      mode: "cors"
-    });
+  const DataRow = props => {
+    return <div className="search-results-row">{props.data.name}</div>;
+  };
 
-    fetch(request)
-      .then(resp => resp.json())
-      .then(resp =>
-        this.setState({
-          resetter: "hasValue",
-          actualValue: resp,
-          storedValue: resp
-        })
-      )
-      .catch(err => console.log(err));
-  }
-
-  perfRequest(req) {
-    let uri = null;
-    if (req.val !== "") {
-      switch (req.requestType) {
-        case "region":
-          console.log(req.val);
-          uri = `https://restcountries.eu/rest/v2/region/${req.val}`;
-          this.API_CALL(uri);
-          break;
-        case "input":
-          console.log("was from input");
-          break;
-        default:
-          console.log("something went wrong");
-      }
-    }
-  }
-
-  render() {
-    return (
+  return (
+    props.valueToFetch.val !== "" && (
       <div className="search-results">
-        {this.state.resetter === "none" &&
-          this.perfRequest(this.props.valueToFetch)}
-        {this.state.actualValue === null ? (
-          <div className="loader" />
-        ) : (
-          console.log(this.state.actualValue)
-        )}
+        {resetVal === true
+          ? dataFetching(valueToFetch)
+          : props.dataFetchResult.map(each => {
+              return <DataRow key={each.name} data={each} />;
+            })}
       </div>
-    );
-  }
-}
-
-
-//// NEED TO MOVE FETCH REQUEST AT PARENT, CANNOT TRIGGER A RE RENDER , AS IT WILL RESULT TO INFINITE LOOP!,, BUT YOU CAN TRY AGAIN TOMORROW AND SEE IF YOU CAN DO ANY WORKAROUND!!! GOOD LUCK! ,, YOU CAN DO IT! :)
+    )
+  );
+};

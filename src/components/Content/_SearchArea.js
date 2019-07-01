@@ -7,11 +7,14 @@ export default class Search extends Component {
     super(props);
     this.state = {
       textValue: "",
-      currentRegion: ""
+      currentRegion: "",
+      resetVal: true,
+      fetchResults: ""
     };
     this.handleInput = this.handleInput.bind(this);
     this.regionalBlockWasClicked = this.regionalBlockWasClicked.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.dataFetch = this.dataFetch.bind(this);
   }
 
   handleInput(e) {
@@ -31,8 +34,34 @@ export default class Search extends Component {
     const isString = typeof e === "string" ? true : false;
     this.setState({
       textValue: "",
-      currentRegion: isString ? e : e.target.textContent
+      currentRegion: isString ? e : e.target.textContent,
+      resetVal: true
     });
+  }
+
+  API_CALL(path) {
+    let request = new Request(path, {
+      method: "GET",
+      mode: "cors"
+    });
+    fetch(request)
+      .then(resp => resp.json())
+      .then(resp => {
+        this.setState({ resetVal: false, fetchResults: resp });
+      })
+      .catch(err => console.log(err));
+  }
+
+  dataFetch(res) {
+    let uri = null;
+    switch (res.type) {
+      case "region":
+        uri = `https://restcountries.eu/rest/v2/region/${res.val}`;
+        this.API_CALL(uri);
+        break;
+      case "input":
+        break;
+    }
   }
 
   render() {
@@ -55,11 +84,13 @@ export default class Search extends Component {
           regionalBlockWasClicked={this.regionalBlockWasClicked}
         />
         <SearchResult
-         resetVal="none"
+          dataFetchResult={this.state.fetchResults}
+          dataFetch={this.dataFetch}
+          resetVal={this.state.resetVal}
           valueToFetch={
             this.state.textValue === ""
-              ? { val: this.state.currentRegion, requestType: "region" }
-              : { val: this.state.textValue, requestType: "input" }
+              ? { val: this.state.currentRegion, type: "region" }
+              : { val: this.state.textValue, type: "input" }
           }
         />
       </div>
