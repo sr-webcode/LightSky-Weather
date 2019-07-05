@@ -7,6 +7,16 @@ import {
   faWindowClose,
   faThermometerHalf,
   faWind,
+  faSortDown
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faHome, faSearch, faHistory, faCloudSun, faWindowClose,faThermometerHalf, faWind);
+library.add(
+  faHome,
+  faSearch,
+  faHistory,
+  faCloudSun,
+  faWindowClose,
+  faThermometerHalf,
+  faWind,
+  faSortDown
+);

@@ -5,10 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default class Navigation extends Component {
   render() {
     return (
-      <Fragment>
-       
+      <Fragment>       
         <nav className="weather-navigation-menu">
-         
           <span className="burger" onClick={this.props.burgerClick}>
             <div />
             <div />

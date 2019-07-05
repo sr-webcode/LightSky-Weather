@@ -107,11 +107,53 @@
   font-weight: 400;
 }
 
-.search-results-row {
+.search-row {
+  position: relative;
   display: block;
   width: 100%;
   background-color: rgba(12, 158, 182, 0.2);
   color: #fefefe;
   margin-top: 10px;
   padding: 10px;
+  overflow: hidden;
+  transition: background 0.4s ease, height 0.4s ease;
+  &:hover {
+    cursor: pointer;
+    background-color: #2f8b99;
+  }
+  svg {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    right: 0;
+    margin-top: 10px;
+    margin-right: 18px;
+    transform-origin: bottom;
+  }
+}
+
+.search-row-desc {
+  position: relative;
+  min-height: 110px;
+  font-size: 0;
+}
+
+%search-row-ib {
+  display: inline-block;
+  vertical-align: middle;
+  width: 49.99%;
+}
+
+.search-row-desc-image {
+  @extend %search-row-ib;
+}
+
+.search-row-desc-text {
+  @extend %search-row-ib;
+  h2 {
+    font-size: 40px;
+  }
+  p {
+    font-size: 16px;
+  }
 }

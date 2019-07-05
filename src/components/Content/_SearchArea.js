@@ -15,13 +15,15 @@ export default class Search extends Component {
     this.regionalBlockWasClicked = this.regionalBlockWasClicked.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.dataFetch = this.dataFetch.bind(this);
+  
   }
 
   handleInput(e) {
     this.setState({
       textValue: e.target.value
     });
-  }
+ }
+
 
   handleFocus(e) {
     let spanParent = e.target.parentElement;
