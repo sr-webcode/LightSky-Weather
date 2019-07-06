@@ -26,7 +26,7 @@ class _weatherReport extends Component {
     fetch(request)
       .then(res => res.json())
       .then(res => {
-        this.props.track(res);
+        this.props.track(res);     
       })
       .catch(err => console.log(err));
     return <div className="loader" />;
@@ -34,7 +34,7 @@ class _weatherReport extends Component {
 
   dataExtract(info) {
     if (info !== null) {
-      const { apparentTemperature, icon, summary, windSpeed } = info.currently;
+           const { apparentTemperature, icon, summary, windSpeed } = info.currently;
       const { data } = info.daily;
       let selectedDays = data.filter((data, index) => {
         if (index > 0 && index < 5) {

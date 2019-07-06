@@ -9,21 +9,23 @@ export default class Search extends Component {
       textValue: "",
       currentRegion: "",
       resetVal: true,
-      fetchResults: ""
+      fetchResults: "",
+
     };
     this.handleInput = this.handleInput.bind(this);
     this.regionalBlockWasClicked = this.regionalBlockWasClicked.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.dataFetch = this.dataFetch.bind(this);
-  
+    this.typeTimeout = null;
   }
 
   handleInput(e) {
-    this.setState({
-      textValue: e.target.value
-    });
- }
-
+    clearTimeout(this.typeTimeout);
+    let inputText = e.target.value;
+    this.typeTimeout = setTimeout(() => {
+      this.setState({ textValue: inputText, resetVal: true });
+    }, 500);
+  }
 
   handleFocus(e) {
     let spanParent = e.target.parentElement;
@@ -41,7 +43,7 @@ export default class Search extends Component {
     });
   }
 
-  API_CALL(path) {
+  API_CALL(path, viaInput) {
     let request = new Request(path, {
       method: "GET",
       mode: "cors"
@@ -49,9 +51,42 @@ export default class Search extends Component {
     fetch(request)
       .then(resp => resp.json())
       .then(resp => {
+        if (viaInput) {
+          if (resp.status === 404) {
+            return this.setState({
+              resetVal: false,
+              fetchResults: "the search returned no results...",
+      
+            });
+          }
+
+          let finalval = resp.filter(each => {
+            return (
+              each.name
+                .toLowerCase()
+                .indexOf(this.state.textValue.toLowerCase()) != -1
+            );
+          });
+
+          return this.setState({
+            resetVal: false,
+            fetchResults:
+              finalval.length > 0
+                ? finalval
+                : "the search returned no results...",
+         
+          });
+        }
+
         this.setState({ resetVal: false, fetchResults: resp });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          resetVal: false,
+          fetchResults: "something went wrong, please refresh your browser"
+        });
+      });
   }
 
   dataFetch(res) {
@@ -62,7 +97,11 @@ export default class Search extends Component {
         this.API_CALL(uri);
         break;
       case "input":
+        uri = `https://restcountries.eu/rest/v2/name/${res.val}`;
+        this.API_CALL(uri, true);
         break;
+      default:
+        console.log("something went teoo");
     }
   }
 
@@ -74,7 +113,7 @@ export default class Search extends Component {
             type="text"
             name="search-text"
             className="input-search"
-            value={this.state.textValue}
+            // value={this.state.textValue}
             onChange={this.handleInput}
             onFocus={this.handleFocus}
             onBlur={this.handleFocus}
@@ -87,6 +126,8 @@ export default class Search extends Component {
         />
         <SearchResult
           dataFetchResult={this.state.fetchResults}
+          
+          inputBoxValue={this.state.textValue}
           dataFetch={this.dataFetch}
           resetVal={this.state.resetVal}
           valueToFetch={

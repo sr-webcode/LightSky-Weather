@@ -11,6 +11,7 @@ class _DataRow extends Component {
     };
     this.sniffHeight = this.sniffHeight.bind(this);
     this.wasClickedTrack = this.wasClickedTrack.bind(this);
+    this.nameHighlighter = this.nameHighlighter.bind(this);
   }
 
   sniffHeight(e) {
@@ -18,7 +19,6 @@ class _DataRow extends Component {
     let arrow = e.currentTarget.firstElementChild;
 
     if (whatHeight === 44) {
- 
       e.currentTarget.style.setProperty("height", "380px");
       arrow.style.setProperty("transform", "rotateX(180deg)");
       this.setState({ wasClicked: true });
@@ -29,15 +29,43 @@ class _DataRow extends Component {
   }
 
   wasClickedTrack(data) {
-
     this.setState({
       wasClicked: false,
-      payLoad: data,
+      payLoad: data
     });
+  }
+
+  nameHighlighter(name) {
+    if (!this.props.textHighlight) {
+      return name;
+    }
+
+    let hilit = this.props.textHighlight;
+    let startPoint = name.toLowerCase().indexOf(hilit);
+    let endPoint = startPoint + hilit.length - 1;
+
+    let splitLetters = name
+      .split("")
+      .map((each, index) => {
+        if (index >= startPoint && index <= endPoint) {
+          return `<span style="background-color: #0C9EB6">${each}</span>`;
+        }
+        return each;
+      })
+      .join("");
+
+    function createMarkup() {
+      return {
+        __html: `${splitLetters}`
+      };
+    }
+
+    return <span dangerouslySetInnerHTML={createMarkup()} />
   }
 
   render() {
     const { latlng } = this.props.data;
+
     return (
       <div
         className="search-row"
@@ -45,7 +73,7 @@ class _DataRow extends Component {
         style={{ height: "44px" }}
       >
         <FontAwesomeIcon icon="sort-down" />
-        {this.props.data.name}
+        {this.nameHighlighter(this.props.data.name)}
         <WeatherReport
           wasClicked={this.state.wasClicked}
           coords={latlng}

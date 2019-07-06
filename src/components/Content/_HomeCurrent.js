@@ -3,8 +3,9 @@ import ReactAnimatedWeather from "react-animated-weather";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default props => {
-  const { tz, temp, sum, icon, windSpeed } = props.data;
 
+  const { tz, temp, sum, icon, windSpeed } = props.data;
+  
   return (
     <div className="home-info-current">
       <span className="tempToggler" onClick={props.triggerTemp}>
