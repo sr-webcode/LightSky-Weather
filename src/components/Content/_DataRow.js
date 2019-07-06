@@ -16,9 +16,10 @@ class _DataRow extends Component {
   sniffHeight(e) {
     let whatHeight = e.currentTarget.offsetHeight;
     let arrow = e.currentTarget.firstElementChild;
+
     if (whatHeight === 44) {
-      let scrollHt = e.currentTarget.scrollHeight;
-      e.currentTarget.style.setProperty("height", scrollHt + "px");
+ 
+      e.currentTarget.style.setProperty("height", "380px");
       arrow.style.setProperty("transform", "rotateX(180deg)");
       this.setState({ wasClicked: true });
     } else {

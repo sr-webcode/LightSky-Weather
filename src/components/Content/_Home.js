@@ -90,6 +90,8 @@ export default class Home extends Component {
     let converted = Math.floor(((f - 32) * 5) / 9);
     return converted;
   }
+
+  
   toFahrenheit(c) {
     let firstConvert = this.toCelsius(c);
     let converted = Math.floor((firstConvert * 9) / 5) + 32;
