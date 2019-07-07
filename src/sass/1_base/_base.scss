@@ -21,6 +21,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  min-height: 100%;
 }
 
 image {
@@ -43,9 +44,8 @@ image {
   position: relative;
   z-index: 5;
   padding: 10px;
- 
+
   margin: 0 auto;
- 
 }
 
 .loader {
@@ -92,5 +92,35 @@ image {
     transform: translate(-50%, -50%) rotate(0);
     border: 5px solid #0c9eb6;
     border-left: 5px solid transparent;
+  }
+}
+
+.attribution {
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fefefe;
+  letter-spacing: 1px;
+  margin: 20px 0;
+  a {
+    color: #0c9eb6;
+    // text-decoration: none;
+    &:hover {
+      color: #1cc5df;
+    }
+  }
+}
+
+.notFound {
+  width: 100%;
+  height: 100%;
+  color: #fefefe;
+  position: relative;
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

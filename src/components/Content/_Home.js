@@ -91,7 +91,6 @@ export default class Home extends Component {
     return converted;
   }
 
-  
   toFahrenheit(c) {
     let firstConvert = this.toCelsius(c);
     let converted = Math.floor((firstConvert * 9) / 5) + 32;
@@ -110,23 +109,32 @@ export default class Home extends Component {
   render() {
     return (
       <div className="home-info">
-        {this.state.foreCast.length > 0 && (
-          <Current
-            data={this.state.current}
-            triggerTemp={this.tempSignChange}
-            tempSign={this.state.tempSign}
-            toCelsius={this.toCelsius}
-            toFahrenheit={this.toFahrenheit}
-          />
+        {this.state.foreCast.length < 0 ? (
+          <div className="loader" />
+        ) : (
+          <Fragment>
+            <Current
+              data={this.state.current}
+              triggerTemp={this.tempSignChange}
+              tempSign={this.state.tempSign}
+              toCelsius={this.toCelsius}
+              toFahrenheit={this.toFahrenheit}
+            />
+            <Forecast
+              data={this.state.foreCast}
+              tempSign={this.state.tempSign}
+              toCelsius={this.toCelsius}
+              toFahrenheit={this.toFahrenheit}
+            />
+          </Fragment>
         )}
-        {this.state.foreCast.length > 0 && (
-          <Forecast
-            data={this.state.foreCast}
-            tempSign={this.state.tempSign}
-            toCelsius={this.toCelsius}
-            toFahrenheit={this.toFahrenheit}
-          />
-        )}
+
+        <span className="attribution">
+          Powered by:
+          <a href="https://darksky.net/poweredby/" id="">
+            Dark Sky API
+          </a>
+        </span>
       </div>
     );
   }

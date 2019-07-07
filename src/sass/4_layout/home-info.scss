@@ -83,6 +83,14 @@
       margin-left: 12px;
     }
   }
+
+   @include respond-to(medium){
+      // display: none;
+       margin-top: 20px;
+
+   }
+
+
 }
 
 .togglerActive {

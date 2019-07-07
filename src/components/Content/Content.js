@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Switch, Route } from "react-router-dom";
+import Page404 from "../Navigation/_page404";
 
 //Dynamically loaded components
 const Home = React.lazy(() => import("./_Home"));
@@ -13,11 +14,7 @@ export default class Content extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/search" component={Search} />
-            <Route
-              render={() => {
-                return <h1>Component not found!</h1>;
-              }}
-            />
+            <Route component={Page404} />
           </Switch>
         </React.Suspense>
       </main>
