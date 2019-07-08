@@ -2,6 +2,7 @@
 
 import Current from "./_HomeCurrent";
 import Forecast from "./_HomeForeCast";
+import GeoLocation from "../Navigation/_GeoLocation";
 
 export default class Home extends Component {
   constructor() {
@@ -9,20 +10,36 @@ export default class Home extends Component {
     this.state = {
       current: "",
       foreCast: [],
-      tempSign: "C"
+      tempSign: "C",
+      geoLocation: {
+        enabled: false,
+        message: ""
+      }
     };
+
     this.positionSuccess = this.positionSuccess.bind(this);
     this.positionError = this.positionError.bind(this);
     this.tempSignChange = this.tempSignChange.bind(this);
     this.toCelsius = this.toCelsius.bind(this);
     this.toFahrenheit = this.toFahrenheit.bind(this);
+    this.fetchLocation = this.fetchLocation.bind(this);
+    this.beginRecall = this.beginRecall.bind(this);
   }
 
   componentDidMount() {
+    this.fetchLocation();
+  }
+
+  fetchLocation() {
     navigator.geolocation.getCurrentPosition(
       this.positionSuccess,
       this.positionError
     );
+  }
+
+  beginRecall(note) {
+    this.fetchLocation();
+    return <GeoLocation message={note} />;
   }
 
   positionSuccess(pos) {
@@ -33,7 +50,12 @@ export default class Home extends Component {
   }
 
   positionError(err) {
-    alert(err, "Please Make Sure you have Location Services turned on!");
+    this.setState({
+      geoLocation: {
+        enabled: false,
+        message: err.message
+      }
+    });
   }
 
   API_CALL(lat, long) {
@@ -72,7 +94,11 @@ export default class Home extends Component {
             tz: timezone,
             windSpeed: wind
           },
-          foreCast: [...weatherPeriod]
+          foreCast: [...weatherPeriod],
+          geoLocation: {
+            enabled: true,
+            message: ""
+          }
         });
       })
       .catch(err => {
@@ -107,7 +133,9 @@ export default class Home extends Component {
   }
 
   render() {
-    return (
+    return !this.state.geoLocation.enabled ? (
+      this.beginRecall(this.state.geoLocation.message)
+    ) : (
       <div className="home-info">
         {this.state.foreCast.length < 0 ? (
           <div className="loader" />

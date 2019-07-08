@@ -7,7 +7,9 @@ import {
   faWindowClose,
   faThermometerHalf,
   faWind,
-  faSortDown
+  faSortDown,
+  faQuestionCircle,
+  faExclamationCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -18,5 +20,7 @@ library.add(
   faWindowClose,
   faThermometerHalf,
   faWind,
-  faSortDown
+  faSortDown,
+  faQuestionCircle,
+  faExclamationCircle
 );
