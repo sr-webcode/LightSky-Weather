@@ -5,6 +5,7 @@ import Page404 from "../Navigation/_Page404";
 //Dynamically loaded components
 const Home = React.lazy(() => import("./_Home"));
 const Search = React.lazy(() => import("./_SearchArea"));
+const History = React.lazy(() => import("./_History"));
 
 export default class Content extends Component {
   render() {
@@ -14,6 +15,7 @@ export default class Content extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/search" component={Search} />
+            <Route exact path="/history" component={History} />
             <Route component={Page404} />
           </Switch>
         </React.Suspense>
