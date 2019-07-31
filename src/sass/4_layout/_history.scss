@@ -63,6 +63,7 @@
 }
 
 .history-text {
+  cursor: none;
   padding: 8px;
   @extend %historyControls;
   background-color: rgba(53, 175, 194, 0.2);
