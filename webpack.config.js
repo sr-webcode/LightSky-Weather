@@ -3,21 +3,27 @@ const path = require("path");
 const miniCSS = require("mini-css-extract-plugin");
 const miniHTML = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const uglifyJS = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   mode: isProduction ? "development" : "production",
   entry: "./src/components/Main.js",
   output: {
     filename: "js/[name].[chunkhash].js",
-    path: path.resolve(__dirname, "./build")
+    path: path.resolve(__dirname, "./build"),
+    chunkFilename: "js/chunk[name].[chunkhash].js"
   },
   devServer: {
     port: 2020
+  },
+  optimization: {
+    minimizer: [new uglifyJS()]
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: "babel-loader",
