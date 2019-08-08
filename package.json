@@ -4,7 +4,7 @@
   "description": "",
   "main": "Main.js",
   "scripts": {
-    "live": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js",
+    "live": "cross-env NODE_ENV=development  webpack-dev-server --history-api-fallback --config webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "css": "^2.2.4",
     "css-loader": "^3.2.0",
     "cssnano": "^4.1.10",
+    "history-api-fallback": "0.0.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "postcss-loader": "^3.0.0",

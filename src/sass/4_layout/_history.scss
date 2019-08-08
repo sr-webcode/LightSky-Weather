@@ -7,6 +7,7 @@
   height: 100%;
   max-width: 550px;
   min-height: 250px;
+
   @include respond-to(medium) {
     max-width: 800px;
   }
@@ -16,6 +17,7 @@
   * {
     margin-top: 5px;
   }
+
   line-height: 1.2;
   background-color: rgba(111, 206, 221, 0.2);
   padding: 12px;
@@ -24,6 +26,7 @@
 }
 
 .date-picker {
+  width: 100%;
   background-color: rgba(53, 175, 194, 0.2);
   border: none;
   padding: 8px;
@@ -34,53 +37,83 @@
   cursor: pointer;
   outline: none;
   transition: background 0.4s linear;
+
   &:focus {
     background-color: rgba(53, 175, 194, 0.5);
   }
 }
 
+#placeholder-date-picker {
+  &::placeholder {
+    color: #fefefe;
+    font-weight: lighter;
+    font-size: 16px;
+  }
+}
+
 %historyControls {
-  font-size: 18px;
   color: #fefefe;
   border: none;
   padding: 8px;
   display: inline-block;
   vertical-align: top;
-  border-radius: 5px;
-  width: 100%;
   outline: none;
   transition: background 0.4s linear;
-  border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+
+  @include respond-to(small) {
+    font-size: 18px;
+  }
 }
+
 
 .react-datepicker-wrapper {
   @extend %historyControls;
+  width: 100%;
   padding: 0;
+
   * {
     width: 100%;
   }
 }
 
 .history-text {
-  cursor: none;
-  padding: 8px;
+  cursor: unset;
+  display: inline-block;
+  width: 70%;
+  vertical-align: middle;
+  padding: 7px;
   @extend %historyControls;
   background-color: rgba(53, 175, 194, 0.2);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+
   &::placeholder {
-    color: rgba(254, 254, 254, 0.9);
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
   }
+
   &:focus {
     background-color: rgba(53, 175, 194, 0.5);
   }
 }
 
+
+
 .history-btn {
+  display: inline-block;
+  vertical-align: middle;
+  width: 30%;
+  padding: 7px;
   @extend %historyControls;
   background-color: rgb(53, 175, 194);
   font-weight: 500;
   transition: unset;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+
   &:hover {
-    background-color: rgba(53, 175, 194, 0.7);
+    background-color: rgba(19, 69, 77, 0.7);
   }
 }

@@ -23,10 +23,12 @@
   height: 100%;
   position: relative;
   text-align: center;
+
   svg {
     margin-right: 5px;
     font-size: 24px;
   }
+
   ul {
     margin: 0 auto;
     display: inline-block;
@@ -40,25 +42,30 @@
   li {
     list-style: none;
   }
+
   li {
     max-width: 200px;
     margin-top: 12px;
     border: 2px solid #567d8a;
     border-radius: 4px;
     text-align: center;
-    transition: all 0.4s ease; 
+    transition: all 0.4s ease;
     cursor: pointer;
+
     &:hover {
       border: 2px solid #0c9eb6;
-      a, span {
+
+      a,
+      span {
         color: #0c9eb6;
       }
-   
-    
+
+
     }
   }
 
-  a, span {
+  a,
+  span {
     transition: all 0.4s ease;
     color: #fefefe;
     display: inline-block;
