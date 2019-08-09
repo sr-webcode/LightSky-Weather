@@ -43,7 +43,6 @@ class _DataRow extends Component {
     let hilit = this.props.textHighlight;
     let startPoint = name.toLowerCase().indexOf(hilit);
     let endPoint = startPoint + hilit.length - 1;
-
     let splitLetters = name
       .split("")
       .map((each, index) => {
@@ -59,8 +58,7 @@ class _DataRow extends Component {
         __html: `${splitLetters}`
       };
     }
-
-    return <span dangerouslySetInnerHTML={createMarkup()} />
+    return <span dangerouslySetInnerHTML={createMarkup()} />;
   }
 
   render() {

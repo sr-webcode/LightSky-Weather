@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Datepicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import GraphResults from './_graphResults';
-import MiniCountryList from './_miniCountryList'
+import GraphResults from "./_graphResults";
+import MiniCountryList from "./_miniCountryList";
 
 export default class _History extends Component {
   constructor(props) {
@@ -11,67 +11,67 @@ export default class _History extends Component {
       currDate: new Date(),
       countryDetails: { name: "", coords: [] },
       countryList: [],
-      previewGraph: false,
-    }
-    this.setCountry = this.setCountry.bind(this)
-    this.handleDateChange = this.handleDateChange.bind(this)
-    this.validateFields = this.validateFields.bind(this)
+      previewGraph: false
+    };
+    this.setCountry = this.setCountry.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.validateFields = this.validateFields.bind(this);
   }
-
 
   validateFields() {
     let toLookUp = null;
-    const validateCountryName = (name) => {
-      const countryResult = this.state.countryList.filter((country) => {
-        toLookUp = country.latlng
-        return country.name.toLowerCase() === name.toLowerCase()
-      })
+    const validateCountryName = name => {
+      const countryResult = this.state.countryList.filter(country => {
+        toLookUp = country.latlng;
+        return country.name.toLowerCase() === name.toLowerCase();
+      });
       return countryResult.length > 0;
-    }
+    };
     const validValues = (entry, value) => {
       switch (entry) {
         case "country":
           if (value !== null && value !== "" && validateCountryName(value)) {
-            return true
+            return true;
           }
           return false;
         case "date":
           if (value !== null && value !== "" && value.getMonth) {
-            return true
+            return true;
           }
           return false;
         default:
-          return false
+          return false;
       }
-    }
-    if (validValues("date", this.state.countryDetails.name) && validValues("country", this.state.currDate)) {
-      console.log(`can begin searching`)
-      console.log(toLookUp)
+    };
+    if (
+      validValues("date", this.state.countryDetails.name) &&
+      validValues("country", this.state.currDate)
+    ) {
+      console.log(`can begin searching`);
+      console.log(toLookUp);
       return;
     }
-    console.log('cannot search!')
+    console.log("cannot search!");
   }
   API_CALL() {
     const url = "https://restcountries.eu/rest/v2/all?fields=name;latlng";
     const req = new Request(url, {
       method: "GET",
       mode: "cors"
-    })
+    });
     fetch(req)
       .then(res => res.json())
       .then(res => this.setState({ countryList: [...res] }))
-      .catch(err => console.log(err.message))
+      .catch(err => console.log(err.message));
   }
   componentDidMount() {
     this.API_CALL();
   }
 
   setCountry(e) {
-    const copy = e.target.value;
-    console.log(copy.trim().length);
     this.setState({
       countryDetails: {
-        name: e.target.value,
+        name: e.target.value.trim(),
         coords: []
       }
     });
@@ -81,12 +81,10 @@ export default class _History extends Component {
     this.setState({ currDate: val });
   }
 
-
-
   render() {
+    console.log(this.state.countryDetails.name);
     return (
       <div className="history">
-
         <div className="history-caption">
           <h2>Time Machine Request</h2>
           <p>
@@ -119,8 +117,12 @@ export default class _History extends Component {
             Get Data
           </button>
 
-          {this.state.countryDetails.name.trim().length !== 0 && <MiniCountryList orgList={this.state.countryList} filterVal={this.state.countryDetails.name} />}
-
+          {this.state.countryDetails.name.trim().length !== 0 && (
+            <MiniCountryList
+              orgList={this.state.countryList}
+              filterVal={this.state.countryDetails.name}
+            />
+          )}
         </div>
         {this.state.previewGraph && <GraphResults />}
       </div>
