@@ -41,6 +41,7 @@ export class _miniCountryList extends Component {
       ) {
         return (
           <li
+            onClick={this.props.setCountry}
             key={this.indexer(country, index)}
             dangerouslySetInnerHTML={this.ResultHighlight(
               country.name,

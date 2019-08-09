@@ -9,9 +9,10 @@ export default class _History extends Component {
     super(props);
     this.state = {
       currDate: new Date(),
-      countryDetails: { name: "", coords: [] },
+      countryDetails: { name: "", coords: null },
       countryList: [],
-      previewGraph: false
+      previewGraph: false,
+      previewDropdown: false
     };
     this.setCountry = this.setCountry.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
@@ -19,14 +20,13 @@ export default class _History extends Component {
   }
 
   validateFields() {
-    let toLookUp = null;
     const validateCountryName = name => {
       const countryResult = this.state.countryList.filter(country => {
-        toLookUp = country.latlng;
         return country.name.toLowerCase() === name.toLowerCase();
       });
       return countryResult.length > 0;
     };
+
     const validValues = (entry, value) => {
       switch (entry) {
         case "country":
@@ -43,16 +43,18 @@ export default class _History extends Component {
           return false;
       }
     };
+
     if (
-      validValues("date", this.state.countryDetails.name) &&
-      validValues("country", this.state.currDate)
+      validValues("country", this.state.countryDetails.name) &&
+      validValues("date", this.state.currDate)
     ) {
-      console.log(`can begin searching`);
-      console.log(toLookUp);
+      console.log(`can begin searching ${this.state.countryDetails.name}`);
+      console.log(this.state.countryDetails.coords);
       return;
     }
     console.log("cannot search!");
   }
+
   API_CALL() {
     const url = "https://restcountries.eu/rest/v2/all?fields=name;latlng";
     const req = new Request(url, {
@@ -69,12 +71,45 @@ export default class _History extends Component {
   }
 
   setCountry(e) {
+    const previewValidation = name => {
+      const filtered = this.state.countryList.filter(each => {
+        return each.name.toLowerCase() === name.toLowerCase();
+      });
+      return filtered.length > 0 ? true : false;
+    };
+
+    let value = null;
+    switch (e.target.tagName.toLowerCase()) {
+      case "input":
+        this.setState({ previewDropdown: true });
+        value = e.currentTarget.value;
+        break;
+      case "li":
+        value = e.currentTarget.textContent;
+        break;
+      default:
+        return false;
+    }
+
+    //fix this part to spread the coordinates properly!!!!
     this.setState({
       countryDetails: {
-        name: e.target.value.trim(),
-        coords: []
-      }
+        name: value,
+        coords: [
+          ...this.state.countryList
+            .filter(each => {
+              if (each.name.toLowerCase() === value.toLowerCase()) {
+                return each;
+              }
+            })
+            .map(each => {
+              return each.latlng;
+            })
+        ]
+      },
+      previewDropdown: previewValidation(value) === true ? false : true
     });
+    //fix this part to spread the coordinates properly!!!!
   }
 
   handleDateChange(val) {
@@ -82,7 +117,6 @@ export default class _History extends Component {
   }
 
   render() {
-    console.log(this.state.countryDetails.name);
     return (
       <div className="history">
         <div className="history-caption">
@@ -109,7 +143,7 @@ export default class _History extends Component {
             className="history-text"
             type="text"
             placeholder="Enter country name.."
-            value={this.state.country}
+            value={this.state.countryDetails.name}
             onChange={this.setCountry}
           />
 
@@ -117,12 +151,14 @@ export default class _History extends Component {
             Get Data
           </button>
 
-          {this.state.countryDetails.name.trim().length !== 0 && (
-            <MiniCountryList
-              orgList={this.state.countryList}
-              filterVal={this.state.countryDetails.name}
-            />
-          )}
+          {this.state.countryDetails.name.trim().length !== 0 &&
+            this.state.previewDropdown && (
+              <MiniCountryList
+                setCountry={this.setCountry}
+                orgList={this.state.countryList}
+                filterVal={this.state.countryDetails.name}
+              />
+            )}
         </div>
         {this.state.previewGraph && <GraphResults />}
       </div>
