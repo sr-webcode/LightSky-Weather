@@ -5,6 +5,7 @@ import GraphResults from "./_graphResults";
 import MiniCountryList from "./_miniCountryList";
 
 export default class _History extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -12,7 +13,7 @@ export default class _History extends Component {
       countryDetails: { name: "", coords: null },
       countryList: [],
       previewGraph: false,
-      previewDropdown: false
+      previewDropdown: false,
     };
     this.setCountry = this.setCountry.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
@@ -20,6 +21,7 @@ export default class _History extends Component {
   }
 
   validateFields() {
+
     const validateCountryName = name => {
       const countryResult = this.state.countryList.filter(country => {
         return country.name.toLowerCase() === name.toLowerCase();
@@ -28,12 +30,15 @@ export default class _History extends Component {
     };
 
     const validValues = (entry, value) => {
+
       switch (entry) {
+
         case "country":
           if (value !== null && value !== "" && validateCountryName(value)) {
             return true;
           }
           return false;
+
         case "date":
           if (value !== null && value !== "" && value.getMonth) {
             return true;
@@ -42,17 +47,17 @@ export default class _History extends Component {
         default:
           return false;
       }
+
     };
 
     if (
       validValues("country", this.state.countryDetails.name) &&
       validValues("date", this.state.currDate)
     ) {
-      console.log(`can begin searching ${this.state.countryDetails.name}`);
-      console.log(this.state.countryDetails.coords);
+      this.setState({ previewGraph: true })
       return;
     }
-    console.log("cannot search!");
+    this.setState({ previewGraph: false })
   }
 
   API_CALL() {
@@ -66,11 +71,13 @@ export default class _History extends Component {
       .then(res => this.setState({ countryList: [...res] }))
       .catch(err => console.log(err.message));
   }
+
   componentDidMount() {
     this.API_CALL();
   }
 
   setCountry(e) {
+
     const previewValidation = name => {
       const filtered = this.state.countryList.filter(each => {
         return each.name.toLowerCase() === name.toLowerCase();
@@ -91,7 +98,7 @@ export default class _History extends Component {
         return false;
     }
 
-    //fix this part to spread the coordinates properly!!!!
+
     this.setState({
       countryDetails: {
         name: value,
@@ -107,9 +114,9 @@ export default class _History extends Component {
             })
         ]
       },
-      previewDropdown: previewValidation(value) === true ? false : true
+      previewDropdown: previewValidation(value) === true ? false : true,
     });
-    //fix this part to spread the coordinates properly!!!!
+
   }
 
   handleDateChange(val) {
@@ -160,8 +167,9 @@ export default class _History extends Component {
               />
             )}
         </div>
-        {this.state.previewGraph && <GraphResults />}
+        {this.state.previewGraph && <GraphResults date={this.state.currDate} coords={this.state.countryDetails.coords} country={this.state.countryDetails.name} />}
       </div>
     );
   }
+
 }
