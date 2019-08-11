@@ -14,7 +14,8 @@ module.exports = {
     chunkFilename: "js/chunk[name].[chunkhash].js"
   },
   devServer: {
-    port: 2020
+    port: 2020,
+    open: "chrome"
   },
   optimization: {
     minimizer: [new uglifyJS()]

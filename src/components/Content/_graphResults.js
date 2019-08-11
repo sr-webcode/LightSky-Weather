@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import Charts from './_charts';
+
 
 
 class _graphResults extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -11,7 +14,7 @@ class _graphResults extends Component {
     }
     this.API_REQUEST = this.API_REQUEST.bind(this)
     this.requestResults = this.requestResults.bind(this)
-    this.renderCharts = this.renderCharts.bind(this)
+
   }
 
   API_REQUEST() {
@@ -37,15 +40,9 @@ class _graphResults extends Component {
       .catch(err => console.log(err))
   }
 
-
   requestResults() {
     this.API_REQUEST();
     return <span className="loader" />
-  }
-
-  renderCharts() {
-    console.log(this.state.results)
-    return <div>the fucking charts!</div>
   }
 
   render() {
@@ -55,7 +52,7 @@ class _graphResults extends Component {
     }
     return (
       <div>
-        {this.props.coords.length > 0 && lookupAgain === true ? this.requestResults() : this.renderCharts()}
+        {this.props.coords.length > 0 && lookupAgain === true ? this.requestResults() : <Charts data={this.state.results} />}
       </div>
     )
   }
