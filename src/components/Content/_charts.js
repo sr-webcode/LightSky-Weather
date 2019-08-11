@@ -4,6 +4,17 @@ import { Line, Radar } from 'react-chartjs-2'
 
 
 
+const toHumanTime = (time) => {
+  const newTime = new Date(time * 1000);
+  // const AM_PM = newTime.getHours() > 12 ? "PM" : "AM";
+  // const hours = newTime.getHours() > 12 ? newTime.getHours() - 12 : newTime.getHours();
+  // const minutes = newTime.getMinutes() < 10 ? String(newTime.getMinutes()) + "0" : String(newTime.getMinutes());
+  // const seconds = newTime.getSeconds() < 10 ? String(newTime.getSeconds()) + "0" : String(newTime.getSeconds());
+  // console.log(`The time is ${String(hours)}:${minutes}:${seconds} ${AM_PM}`);
+  console.log(`The time is ${String(newTime.getHours() - 1)}`);
+}
+
+
 const getSelectedTime = (data) => {
   const timeRanges = [0, 4, 8, 12, 16];
   const filtered = data.filter((each, index) => {
@@ -18,10 +29,9 @@ const lineData = (values) => {
   const temperatureData = values.map((each) => {
     return {
       temp: each.apparentTemperature,
-      time: each.time
+      time: toHumanTime(each.time)
     }
   })
-  return temperatureData.concat([{ type: "line" }]);
 }
 
 const radarData = (values) => {
@@ -40,7 +50,6 @@ const returnSpecific = (val, legend) => {
 
 
 const chartStruct = dataSet => {
-
   let type = dataSet.filter((each) => {
     return each.hasOwnProperty('type');
   }).map((result) => {
@@ -53,7 +62,8 @@ const chartStruct = dataSet => {
         labels: returnSpecific(dataSet, 'time'),
         datasets: [{
           label: "4-hour Temperature Status",
-          data: returnSpecific(dataSet, 'apparentTemperature')
+          data: returnSpecific(dataSet, 'temp'),
+          backgroundColor: ['rgba(255,255,255,0.90)'],
         }]
       }
     case "radar":
@@ -66,16 +76,11 @@ const chartStruct = dataSet => {
 
 const Charts = (props) => {
   const lineDataSet = lineData(getSelectedTime(props.data));
-  const data = chartStruct(lineDataSet);
-  console.log(data);
   return (<div className="chart-group">
-    <h2>the fuckng charts!</h2>
+    <h2>the tfuckng charts!</h2>
+    {/* <Line daa={chartStruct(lineDataSet)} /> */}
   </div>)
 }
 
 
 export default Charts;
-
-
-
-///please i want to test on internet ,, how it looks like ,,,, please.. i eat de fishh
