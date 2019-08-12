@@ -51,7 +51,7 @@ class _graphResults extends Component {
       lookupAgain = true;
     }
     return (
-      <div>
+      <div className="graph">
         {this.props.coords.length > 0 && lookupAgain === true ? this.requestResults() : <Charts data={this.state.results} />}
       </div>
     )
