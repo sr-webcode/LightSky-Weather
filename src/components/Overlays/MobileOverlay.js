@@ -22,7 +22,7 @@ export default class MobileOverlay extends Component {
               </Link>
             </li>
             <li>
-              <Link to="" onClick={this.props.btnClose}>
+              <Link to="/history" onClick={this.props.btnClose}>
                 <FontAwesomeIcon icon="history" />
                 History
               </Link>

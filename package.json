@@ -2,27 +2,47 @@
   "name": "Weather_App",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "Main.js",
   "scripts": {
-    "live": "parcel ./src/index.html --no-source-maps --no-cache --out-dir ./output -p 2020"
+    "live": "cross-env NODE_ENV=development  webpack-dev-server --history-api-fallback --config webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js"
   },
   "keywords": [],
   "author": "Sean",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "sass": "^1.21.0"
+    "autoprefixer": "^9.6.1",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^5.2.0",
+    "css": "^2.2.4",
+    "css-loader": "^3.2.0",
+    "cssnano": "^4.1.10",
+    "history-api-fallback": "0.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "postcss-loader": "^3.0.0",
+    "sass": "^1.22.9",
+    "sass-loader": "^7.1.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "chart.js": "^2.8.0",
     "font": "0.0.4",
     "react": "^16.8.6",
     "react-animated-weather": "^2.0.0",
+    "react-chartjs-2": "^2.7.6",
+    "react-datepicker": "^2.8.0",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1"
   }

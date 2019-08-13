@@ -7,13 +7,31 @@
   height: 100%;
   background-color: rgba(0, 17, 20, 0.9);
   z-index: 50;
-  transition: transform 0.4s ease;
   transform: translateX(-100%);
   overflow-y: auto;
+  opacity: 0;
 }
 
 .open {
-  transform: translateX(0);
+  animation: slide 0.4s linear forwards, visibleNow 0.2s ease 0.2s forwards;
+}
+
+@keyframes visibleNow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .mobile-menu {
@@ -23,10 +41,12 @@
   height: 100%;
   position: relative;
   text-align: center;
+
   svg {
     margin-right: 5px;
     font-size: 24px;
   }
+
   ul {
     margin: 0 auto;
     display: inline-block;
@@ -40,25 +60,28 @@
   li {
     list-style: none;
   }
+
   li {
     max-width: 200px;
     margin-top: 12px;
     border: 2px solid #567d8a;
     border-radius: 4px;
     text-align: center;
-    transition: all 0.4s ease; 
+    transition: all 0.4s ease;
     cursor: pointer;
+
     &:hover {
       border: 2px solid #0c9eb6;
-      a, span {
+
+      a,
+      span {
         color: #0c9eb6;
       }
-   
-    
     }
   }
 
-  a, span {
+  a,
+  span {
     transition: all 0.4s ease;
     color: #fefefe;
     display: inline-block;

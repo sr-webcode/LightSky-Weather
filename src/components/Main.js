@@ -1,4 +1,5 @@
 import "../sass/style.scss";
+
 import React, { Component } from "react";
 import { render as Show } from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";

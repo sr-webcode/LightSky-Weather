@@ -1,0 +1,22 @@
+.miniCountryList {
+  background-color: rgba(53, 175, 194, 0.5);
+  list-style: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  overflow: hidden;
+  li {
+    padding: 4px;
+    cursor: pointer;
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    &:hover {
+      background-color: rgba(53, 175, 194, 0.8);
+    }
+  }
+}
+
+.text-highlight {
+  background-color: rgb(53, 175, 194);
+  font-weight: bold;
+}
