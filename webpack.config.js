@@ -4,6 +4,7 @@ const miniCSS = require("mini-css-extract-plugin");
 const miniHTML = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const uglifyJS = require("uglifyjs-webpack-plugin");
+const copyFile = require("copy-webpack-plugin");
 
 module.exports = {
   mode: isProduction ? "development" : "production",
@@ -64,6 +65,12 @@ module.exports = {
       filename: "index.html",
       template: "./src/index.html"
     }),
+    new copyFile([
+      {
+        from: "./_redirects",
+        to: path.resolve(__dirname, "./build")
+      }
+    ]),
     new CleanWebpackPlugin()
   ]
 };
