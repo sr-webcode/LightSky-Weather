@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import Page404 from "../Navigation/_Page404";
+import Page404 from "../Navigation/_page404";
 
 //Dynamically loaded components
 const Home = React.lazy(() => import("./_Home"));
