@@ -38,7 +38,7 @@ const tempData = values => {
         time: toHumanTime(each.time)
       };
     })
-    .concat([{ type: "line" }]);
+    .concat([{ type: "temp" }]);
   return temperatureData;
 };
 
@@ -52,7 +52,7 @@ const windData = values => {
         time: toHumanTime(each.time)
       };
     })
-    .concat([{ type: "line" }]);
+    .concat([{ type: "wind" }]);
   return windMeasureData;
 };
 
@@ -76,8 +76,9 @@ const chartStruct = dataSet => {
       return result.type;
     })
     .toString();
+
   switch (type) {
-    case "line":
+    case "temp":
       return {
         labels: returnSpecific(dataSet, "time"),
         datasets: [
@@ -101,9 +102,30 @@ const chartStruct = dataSet => {
           }
         ]
       };
-    case "radar":
-      console.log("dadada");
-      break;
+    case "wind":
+      return {
+        labels: returnSpecific(dataSet, "time"),
+        datasets: [
+          {
+            label: "Bearing",
+            data: returnSpecific(dataSet, "bearing"),
+            borderColor: ["goldenrod"],
+            borderDash: [5],
+            pointBackgroundColor: ["#ffff", "#ffff", "#ffff", "#ffff", "#ffff"]
+          },
+          {
+            label: "Gust",
+            data: returnSpecific(dataSet, "gust"),
+            backgroundColor: ["rgba(243,240,18,0.40)"],
+            pointBackgroundColor: ["#ffff", "#ffff", "#ffff", "#ffff", "#ffff"]
+          },
+          {
+            label: "Speed",
+            data: returnSpecific(dataSet, "speed"),
+            backgroundColor: ["rgba(53,175,194,0.80)"]
+          }
+        ]
+      };
     default:
       console.log("something went wrong...");
   }
@@ -142,16 +164,22 @@ const chartOptions = title => {
 const Charts = props => {
   const tempDataSet = tempData(getSelectedRanges(props.data));
   const windDataSet = windData(getSelectedRanges(props.data));
-  
-  console.log(windDataSet);
 
   return (
-    <div className="chart-group">
-      <Line
-        data={chartStruct(tempDataSet)}
-        options={chartOptions("Temperature")}
-      />
-    </div>
+    <Fragment>
+      <div className="chart-group">
+        <Line
+          data={chartStruct(tempDataSet)}
+          options={chartOptions("Temperature")}
+        />
+      </div>
+      <div className="chart-group">
+        <Line
+          data={chartStruct(windDataSet)}
+          options={chartOptions("Wind Data")}
+        />
+      </div>
+    </Fragment>
   );
 };
 

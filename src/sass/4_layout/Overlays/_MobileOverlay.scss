@@ -7,13 +7,31 @@
   height: 100%;
   background-color: rgba(0, 17, 20, 0.9);
   z-index: 50;
-  transition: transform 0.4s ease;
   transform: translateX(-100%);
   overflow-y: auto;
+  opacity: 0;
 }
 
 .open {
-  transform: translateX(0);
+  animation: slide 0.4s linear forwards, visibleNow 0.2s ease 0.2s forwards;
+}
+
+@keyframes visibleNow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .mobile-menu {
@@ -59,8 +77,6 @@
       span {
         color: #0c9eb6;
       }
-
-
     }
   }
 

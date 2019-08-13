@@ -7,5 +7,20 @@
 .chart-group {
   margin-top: 40px;
   display: block;
-  width: 100%;
+  // width: 100%;
+}
+
+.error-date {
+  display: inline-block;
+  margin-top: 20px;
+  background-color: rgba(0, 165, 190, 0.4);
+  background-color: rgba(233, 167, 25, 0.829);
+  color: #fefefe;
+  padding: 6px;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  svg {
+    margin: 0 4px;
+  }
 }
