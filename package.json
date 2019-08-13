@@ -39,6 +39,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "chart.js": "^2.8.0",
     "font": "0.0.4",
+    "npm-merge-driver": "^2.3.5",
     "react": "^16.8.6",
     "react-animated-weather": "^2.0.0",
     "react-chartjs-2": "^2.7.6",
