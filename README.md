@@ -3,6 +3,20 @@ A simple weather app application using react js. It can do weather search by a s
  
 See the app in action : Light Sky Weather](https://light-sky.netlify.com/)
 
+### Main Page
+![ScreenShot](/screenshots/light-home.jpg)
+
+### Search Page
+![ScreenShot](/screenshots/light-search.jpg)
+
+
+### Search Page
+![ScreenShot](/screenshots/light-history.jpg)
+
+Charts powered by Chart.js :)
+
+
+
 
 ## Local Installation
 
