@@ -6,11 +6,11 @@ See the app in action : Light Sky Weather](https://light-sky.netlify.com/)
 ### Main Page
 ![ScreenShot](/screenshots/light-home.jpg)
 
-### Search Page
+### Search Module
 ![ScreenShot](/screenshots/light-search.jpg)
 
 
-### Search Page
+### History Lookup 
 ![ScreenShot](/screenshots/light-history.jpg)
 
 Charts powered by Chart.js :)
