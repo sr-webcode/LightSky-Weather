@@ -27,3 +27,6 @@ Charts powered by Chart.js :)
 4.View app on localhost:2020
 ```
 
+
+*Note: Make sure you click/enable Access Location* :smile:
+
